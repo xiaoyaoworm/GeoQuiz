@@ -14,7 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        android:id="@+id/question_text"/>
+        android:id="@+id/question_text"
+        android:onClick="goNext"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -38,12 +39,23 @@
             android:onClick="checkFalse"/>
     </LinearLayout>
 
-    <Button
-        android:text="@string/next_button"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/next_button"
-        android:onClick="goNext"/>
+        android:layout_height="wrap_content">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/prev_button"
+            android:onClick="goPrev"
+            android:src = "@drawable/arrow_left"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/next_button"
+            android:onClick="goNext"
+            android:src="@drawable/arrow_right"/>
+    </LinearLayout>
 
 </LinearLayout>

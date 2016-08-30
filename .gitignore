@@ -44,3 +44,5 @@ captures/
 
 # Mac files
 .DS_Store
+libs/
+src/main/res/drawable/

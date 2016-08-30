@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +14,8 @@ public class QuizActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
-    private Button mNextButton;
+    private ImageButton mNextButton;
+    private ImageButton mPrevButton;
     private TextView mQuestion;
 
     private Question[] mQuestionBank = new Question[]{
@@ -33,11 +35,12 @@ public class QuizActivity extends AppCompatActivity {
 
         mTrueButton = (Button) findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
-        mNextButton = (Button) findViewById(R.id.next_button);
+        mNextButton = (ImageButton) findViewById(R.id.next_button);
+        mPrevButton = (ImageButton) findViewById(R.id.prev_button);
 
         mQuestion = (TextView) findViewById(R.id.question_text);
-        mQuestion.setText(mQuestionBank[mCurrentId].getTextResId());
 
+        updateQuestion();
     }
 
     public void checkTrue(View view){
@@ -46,11 +49,6 @@ public class QuizActivity extends AppCompatActivity {
 
     public void checkFalse(View view){
         checkResult(false);
-    }
-
-    public void goNext(View view){
-        mCurrentId = (mCurrentId+1)%mQuestionBank.length;
-        mQuestion.setText(mQuestionBank[mCurrentId].getTextResId());
     }
 
     private void checkResult(boolean answer){
@@ -62,6 +60,22 @@ public class QuizActivity extends AppCompatActivity {
             mResId = R.string.incorrect_toast;
         }
         Toast.makeText(QuizActivity.this, mResId, Toast.LENGTH_SHORT).show();
+    }
+
+    public void goNext(View view){
+        mCurrentId = (mCurrentId+1)%mQuestionBank.length;
+        updateQuestion();
+    }
+
+    public void goPrev(View view){
+        mCurrentId = (mCurrentId+mQuestionBank.length-1)%mQuestionBank.length;
+        updateQuestion();
+    }
+
+
+
+    private void updateQuestion(){
+        mQuestion.setText(mQuestionBank[mCurrentId].getTextResId());
     }
 
 
