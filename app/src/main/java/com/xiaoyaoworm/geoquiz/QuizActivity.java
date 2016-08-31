@@ -1,5 +1,6 @@
 package com.xiaoyaoworm.geoquiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
+    private static final String EXTRA_ANSWER_IS_TRUE = "com.xiaoyaoworm.geoquiz.answer_is_true";
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -117,11 +119,14 @@ public class QuizActivity extends AppCompatActivity {
         updateQuestion();
     }
 
-
-
     private void updateQuestion(){
         mQuestion.setText(mQuestionBank[mCurrentId].getTextResId());
     }
 
-
+    public void cheat(View view){
+        Intent i = new Intent(QuizActivity.this, CheatActivity.class);
+        boolean answer_is_true = mQuestionBank[mCurrentId].isAnswerTrue();
+        i.putExtra(EXTRA_ANSWER_IS_TRUE,answer_is_true);
+        startActivity(i);
+    }
 }
