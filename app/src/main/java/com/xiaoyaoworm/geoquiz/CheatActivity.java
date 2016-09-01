@@ -21,11 +21,16 @@ public class CheatActivity extends AppCompatActivity {
     private boolean mAnswerIsTrue;
     private Button mShowAnswerButton;
     private TextView mAnswerTextView;
+    private TextView mAPIVersion;
 
-    public static Intent newIntent(Context packageContext, boolean answerIsTrue){
+    public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
         Intent i = new Intent(packageContext, CheatActivity.class);
         i.putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue);
         return i;
+    }
+
+    public static boolean wasAnswerShown(Intent result) {
+        return result.getBooleanExtra(EXTRA_ANSWER_SHOWN, false);
     }
 
     @Override
@@ -35,18 +40,20 @@ public class CheatActivity extends AppCompatActivity {
 
         mAnswerTextView = (TextView) findViewById(R.id.answer_text_view);
         mShowAnswerButton = (Button) findViewById(R.id.show_answer_button);
+        mAPIVersion = (TextView) findViewById(R.id.api_version);
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
+        mAPIVersion.setText("API level "+Build.VERSION.SDK_INT);
     }
 
-    public void showCheatAnswer(View view){
-        if(mAnswerIsTrue) mAnswerTextView.setText(R.string.true_button);
+    public void showCheatAnswer(View view) {
+        if (mAnswerIsTrue) mAnswerTextView.setText(R.string.true_button);
         else mAnswerTextView.setText(R.string.false_button);
         setAnswerShownResult(true);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            int cx = mShowAnswerButton.getWidth()/2;
-            int cy = mShowAnswerButton.getHeight()/2;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int cx = mShowAnswerButton.getWidth() / 2;
+            int cy = mShowAnswerButton.getHeight() / 2;
             float radius = mShowAnswerButton.getWidth();
             Animator animator = ViewAnimationUtils.createCircularReveal(mShowAnswerButton, cx, cy, radius, 0);
             animator.addListener(new AnimatorListenerAdapter() {
@@ -60,10 +67,6 @@ public class CheatActivity extends AppCompatActivity {
         } else {
             mShowAnswerButton.setVisibility(View.INVISIBLE);
         }
-    }
-
-    public static boolean wasAnswerShown(Intent result){
-        return result.getBooleanExtra(EXTRA_ANSWER_SHOWN, false);
     }
 
     public void setAnswerShownResult(boolean isAnswerShown) {

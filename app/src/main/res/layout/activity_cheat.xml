@@ -17,21 +17,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/warning_text"
-        android:padding="24dp"/>
+        android:padding="24dp"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/answer_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        tools:text="Answer"/>
+        tools:text="Answer"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/show_answer_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/show_answer_button"
-        android:onClick="showCheatAnswer"/>
+        android:onClick="showCheatAnswer"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/api_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="API level 23"
+        android:padding="24dp"
+        android:layout_gravity="center"/>
 
 
 </LinearLayout>
